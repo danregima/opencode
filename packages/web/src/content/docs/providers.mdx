@@ -511,6 +511,81 @@ In this example:
 
 ---
 
+### OpenCoder
+
+OpenCoder is an open-source family of code language models available in 1.5B and 8B sizes. You can run OpenCoder models locally through Ollama.
+
+:::tip
+OpenCoder models are optimized for code generation and work well for coding tasks while running entirely on your local machine.
+:::
+
+#### Using OpenCoder with Ollama
+
+1. First, install and start [Ollama](https://ollama.com/).
+
+2. Pull the OpenCoder model:
+
+   ```bash
+   ollama pull opencoder
+   ```
+
+   :::note
+   You can also pull specific sizes like `opencoder:1.5b` or `opencoder:8b`.
+   :::
+
+3. Create or update your `opencode.json` file:
+
+   ```json title="opencode.json" "opencoder" {5-15}
+   {
+     "$schema": "https://opencode.ai/config.json",
+     "provider": {
+       "opencoder": {
+         "npm": "@ai-sdk/openai-compatible",
+         "name": "OpenCoder (local)",
+         "options": {
+           "baseURL": "http://localhost:11434/v1"
+         },
+         "models": {
+           "opencoder": {
+             "name": "OpenCoder 8B"
+           }
+         }
+       }
+     }
+   }
+   ```
+
+4. Run the `/models` command and select **OpenCoder 8B**.
+
+#### Multiple OpenCoder Models
+
+You can configure multiple OpenCoder model sizes:
+
+```json title="opencode.json"
+{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "opencoder": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "OpenCoder (local)",
+      "options": {
+        "baseURL": "http://localhost:11434/v1"
+      },
+      "models": {
+        "opencoder:1.5b": {
+          "name": "OpenCoder 1.5B"
+        },
+        "opencoder:8b": {
+          "name": "OpenCoder 8B"
+        }
+      }
+    }
+  }
+}
+```
+
+---
+
 ### OpenAI
 
 1. Head over to the [OpenAI Platform console](https://platform.openai.com/api-keys), click **Create new secret key**, and copy the key.
